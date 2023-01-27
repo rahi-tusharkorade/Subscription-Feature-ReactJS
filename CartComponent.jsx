@@ -10,7 +10,7 @@ const CartComponent = (props) => {
     const [showSubscriptionform, setSubscriptionform] = useState(false);
     
     const handleSubscribe =( prlist) =>{
-        console.log(prlist.process, prlist.item_code)
+        // console.log(prlist.process, prlist.item_code)
         if (prlist.process == "add"){
             setSubList(preval => {
                 return [...preval,prlist.item_code]
@@ -27,7 +27,12 @@ const CartComponent = (props) => {
         setShowCart(false)
         setSubscriptionform(true)
     }
-    console.log("subList",subList);
+    const handleshowback = () =>{
+        setShowCart(true)
+        setSubscriptionform(false)
+        setSubList("")
+    }
+    // console.log("subList",subList);
     localStorage.setItem("subList",subList);
     
     return(
@@ -35,7 +40,7 @@ const CartComponent = (props) => {
         { showCart && <Cart handleSubscribe={handleSubscribe} handleshowSubscriptionform = {handleshowSubscriptionform}/>
           
         }{
-            showSubscriptionform && <Subscriptionform  subList={subList}/>
+            showSubscriptionform && <Subscriptionform  subList={subList} handleshowback={handleshowback }/>
            
         }
         </div>

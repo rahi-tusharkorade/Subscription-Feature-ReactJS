@@ -35,10 +35,6 @@ function Cart ( props ) {
                     return {
                         ...item,
                         qty: value,
-                        sum:
-                            ( item.sale_price
-                                ? item.sale_price
-                                : item.price ) * value
                     };
 
                 return item;
@@ -127,14 +123,14 @@ function Cart ( props ) {
                                             </table>
                                         </div><br></br>
                                         <div className="rahi-cart-bottom">
-                                                <ALink className="btn btn-outline-primary-2 btn-order btn-block" href="/customer/Subscription-form"><span>Proceed To Subscription</span><i className="icon-long-arrow-right"></i></ALink>
+                                                <button className="btn btn-outline-primary-2 btn-order btn-block" href="/customer/Subscription-form" onClick={props.handleshowSubscriptionform}><span>Proceed To Subscription</span><i className="icon-long-arrow-right"></i></button>
                                         </div>
                                     </div>
                                     <aside className="col-lg-3">
                                         <div className="summary summary-cart">
                                             <button
                                                 className="btn btn-outline-primary-2 btn-order btn-block"
-                                               onClick={props.handleshowSubscriptionform}
+                                            //    onClick={props.handleshowSubscriptionform}
                                             >
                                                 PROCEED TO CHECKOUT
                                             </button>

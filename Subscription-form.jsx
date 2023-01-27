@@ -18,7 +18,7 @@ function Subscriptionform ( props ) {
     useEffect( () => {
         const url = "method/shopnosco.public.api.shopnosco_api.pop_codes"
         let data = {}
-         post(url,data)
+        post(url,data)
              .then(response =>{
                  let result = response.message ? response.message : '';
                  let newData = [];
@@ -26,15 +26,14 @@ function Subscriptionform ( props ) {
                      newData.push(result[row])
                  }
                  setPopCodes(newData);
- 
              })
             
      }, [] )
 
-     function handleChange(event, i){
-        var temp = data;
-        setdata(temp)
-    }
+    //  function handleChange(event, i){
+    //     var temp = data;
+    //     setdata(temp)
+    // }
     useEffect( () => {
         let sublist = localStorage.getItem('subList')
        
@@ -67,10 +66,7 @@ function Subscriptionform ( props ) {
                     return {
                         ...item,
                         qty: value,
-                        sum:
-                            ( item.sale_price
-                                ? item.sale_price
-                                : item.price ) * value
+                       
                     };
 
                 return item;
@@ -198,7 +194,7 @@ function Subscriptionform ( props ) {
                                                 </div>  
                                     </div>
                                     <div className="subscription-rahi-cart-bottom">
-                                                <ALink className="btn btn-outline-primary-2 inner" href="/customer/CartComponent"><span>Back</span><i className="icon-long-arrow-left"></i></ALink>
+                                                <button className="btn btn-outline-primary-2 inner" onClick={props.handleshowback}><span>Back</span><i className="icon-long-arrow-left"></i></button>
                                                 <ALink className="btn btn-outline-primary-2 inner" href="/ticket_success" ><span>Submit The Subscription</span></ALink>
                                                 <button className="btn btn-outline-primary-2 inner" onClick={subshow}><span>My Subscription</span><i className="icon-long-arrow-right"></i></button>                                                
                                     </div>	
