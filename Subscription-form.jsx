@@ -12,7 +12,9 @@ function Subscriptionform(props) {
     const [cartList, setCartList] = useState([]);
     const [popCodes, setPopCodes] = useState([]);
     const [sublst, setSublst] = useState([]);
+    
     const [subscribe, setSubscribe] = useState(false);
+    
     const [subfrequency, setsubfrequency] = useState([]);
     
     const [day1, setday1] = useState();
@@ -33,28 +35,29 @@ function Subscriptionform(props) {
             })
     // }, [])
     // useEffect(() => {
-        let sublist = localStorage.getItem('subList')
-        let lst = []
-        let sublst = []
+        let sublist = localStorage.getItem('subList')                                                                    //store only item code - data
+        let list_alldata = []                                                                                           //used for store all data
+        let sublst = []                                                                                                 //used for only itemcode based on select 
         for (let temp in props.cartItems) {
             if (sublist.includes("all-select")) {
-                lst.push(props.cartItems[temp])
+                list_alldata.push(props.cartItems[temp])
                 let dict = { 'itemcode': props.cartItems[temp]['item_code'] }
                 sublst.push(dict)
+                
             }
             if (sublist.includes(props.cartItems[temp]['item_code'])) {
-                lst.push(props.cartItems[temp])
+                list_alldata.push(props.cartItems[temp])
                 let dict = { 'itemcode': props.cartItems[temp]['item_code'] }
                 sublst.push(dict)
             }
 
         }
 
-        setSublst(sublst);
-        setCartList(lst);
+        setSublst(sublst);  
+        // console.log("itemcode",sublst)                    
+        setCartList(list_alldata);                       
 
         {
-
             var today = new Date();
             var day = today.toLocaleString('en-us', { weekday: 'long' });
             setday1(day)
@@ -94,7 +97,7 @@ function Subscriptionform(props) {
         
         var today = new Date();
         var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-        var day = today.toLocaleString('en-us', { weekday: 'long' });
+        // var day = today.toLocaleString('en-us', { weekday: 'long' });
         
         if (value1 == "Daily") {
             var date = (today.getMonth() + 1) + '/' + (today.getDate() + 1) + '/' + today.getFullYear();
@@ -124,6 +127,7 @@ function Subscriptionform(props) {
         <>
             {subscribe ?
                 <Subscribe sublst={sublst} subformshow={subformshow} subfrequency={subfrequency} subdate={subdate} /> :
+
                 <div >
                     <PageHeader title="Subscription Form" subTitle="Shop" />
                     <nav className="breadcrumb-nav">
@@ -225,7 +229,7 @@ function Subscriptionform(props) {
                                         <div>
                                             <Select
                                                 options={popCodes}
-                                                placeholder=""
+                                                placeholder="--Select--"
                                             />
 
                                         </div>

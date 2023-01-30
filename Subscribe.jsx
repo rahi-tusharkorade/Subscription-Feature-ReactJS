@@ -2,12 +2,20 @@ import { useEffect, useState } from 'react';
 import ALink from '~/components/features/alink';
 import PageHeader from '~/components/features/page-header';
 import Moment from 'moment';
+import Popup from 'reactjs-popup';
 
 function mysubscription ( props ) {
     const[data,setdata]= useState([]);
+    const[itemcode,setitemcode]= useState([]);
+
+    
     useEffect( () => {
         setdata(props.sublst.map(d => ({...d, status: "Subscribe"})));
+        // console.log("item codeeeeeeeeeeeeeee",props.sublst)
+        
+        
        }, [ ] )
+
     
     return (
         <div className="main">
@@ -58,7 +66,21 @@ function mysubscription ( props ) {
                                                                         <td className='rahi-down-table'>{props.subdate}</td>
                                                                         <td className='rahi-down-table' >{d.status}</td>
                                                                         <td data-th="Actions" className="rahi-col actions rahi-down-table">
-                                                                            <button className="action view" onClick={props.subformshow}><span>View </span>  |</button> 
+                                                                            {/* <button className="action view" onClick={props.subformshow}><span>View </span>  |</button>  */}
+                                                                           
+                                                                                <Popup  trigger={  <button  onChange={(e) => {
+                                                                                    var newdata = data[index];
+                                                                                    console.log("newdata",newdata.itemcode)
+                                                                                    setitemcode(newdata.itemcode)
+                                                                                    
+                                                                                    }}
+                                                                                                                                                                    
+                                                                                    >View</button>}>
+                                                                                        <div>itemcode is {itemcode} </div>                                                                                                                                                             
+                                                                                    
+                                                                                </Popup>  
+
+                                                                            
                                                                             <button className="action view"  onClick={(e) => {
                                                                                 var temp = data[index];
                                                                                 var newArray = data.map(dt => {
@@ -72,6 +94,7 @@ function mysubscription ( props ) {
                                                                                     }
                                                                                 })
                                                                                 setdata(newArray)
+                                                                                
                                                                             }}><span>Cancel Subscription</span></button>
                                                                         </td>
                                                                     </tr>
