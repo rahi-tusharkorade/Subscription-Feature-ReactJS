@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Cart from "../shop/cart"                                            //cart.jsx
-import { connect } from 'react-redux';
-import { actions as cartAction } from '~/store/cart';
+import Cart from "../shop/cart"            //cart.jsx
 import Subscriptionform from "./Subscription-form";
 
 const CartComponent = (props) => {
@@ -48,10 +46,5 @@ const CartComponent = (props) => {
         </div>
     )
 }
-const mapStateToProps = (state) => (
-    {
-        cartItems: state.cartlist.data
-    }
-)
 
-export default connect(mapStateToProps, { ...cartAction })(CartComponent);
+export default CartComponent;
