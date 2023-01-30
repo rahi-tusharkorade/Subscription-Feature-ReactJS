@@ -2,55 +2,13 @@ import { useEffect, useState } from 'react';
 import ALink from '~/components/features/alink';
 import PageHeader from '~/components/features/page-header';
 import Moment from 'moment';
+
 function mysubscription ( props ) {
     const[data,setdata]= useState([]);
-    const[subdate,setdate1]=useState();
     useEffect( () => {
-        console.log("subfrequency",props.subfrequency)
         setdata(props.sublst.map(d => ({...d, status: "Subscribe"})));
-        
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-        var yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-        if(props.subfrequency=="Daily"){
-            var today = new Date();
-            var dd = String(today.getDate()+1).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-            var Daily = mm + '/' + dd + '/' + yyyy;
-            setdate1(Daily)  
-        }
-        if(props.subfrequency=="Weekly"){
-            var today = new Date();
-            var dd = String(today.getDate()+6).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-            var Weekly = mm + '/' + dd + '/' + yyyy;
-            setdate1(Weekly)
-         
-        }
-        if(props.subfrequency=="Monthly"){
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 2).padStart(2, '0'); 
-            var yyyy = today.getFullYear();
-            var Monthly = mm + '/' + dd + '/' + yyyy;
-            setdate1(Monthly)
-            
-        }
-        if(props.subfrequency=="Yearly"){
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-            var yyyy = (today.getFullYear()+1);
-            var Yearly = mm + '/' + dd + '/' + yyyy;
-            setdate1(Yearly)
-        
-        }
        }, [ ] )
-
+    
     return (
         <div className="main">
             <PageHeader title="My Subscriptions" subTitle="Account Information" />
@@ -97,7 +55,7 @@ function mysubscription ( props ) {
                                                                     <tr className="parent" key={index}>
                                                                         <td className='rahi-down-caret'>{d['itemcode']}</td>
                                                                         <td className='rahi-down-table'> {Moment(d['Transaction Date']).format('MM/DD/YYYY')}</td>
-                                                                        <td className='rahi-down-table'>{subdate}</td>
+                                                                        <td className='rahi-down-table'>{props.subdate}</td>
                                                                         <td className='rahi-down-table' >{d.status}</td>
                                                                         <td data-th="Actions" className="rahi-col actions rahi-down-table">
                                                                             <button className="action view" onClick={props.subformshow}><span>View </span>  |</button> 

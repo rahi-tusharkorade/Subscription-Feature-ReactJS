@@ -5,40 +5,48 @@ import Qty from '~/components/features/qty';
 import PageHeader from '~/components/features/page-header';
 import { actions as cartAction } from '~/store/cart';
 
-function Cart ( props ) {
-    const [ cartList, setCartList ] = useState( [] );
-    useEffect( () => {
-        setCartList( props.cartItems );
-    }, [ props.cartItems] )
+function Cart(props) {
+    const [cartList, setCartList] = useState([]);
+    
+    useEffect(() => {
+        setCartList(props.cartItems);
+    }, [props.cartItems])
 
     const handleChange = (e) => {
-        const { value, checked, name } = e.target;          
+        const { value, checked, name } = e.target;
         console.log(`${value} is ${checked} ${name}`);
         if (checked) {
-            if(name == "all-select"){
-                props.handleSubscribe({"item_code":name,'process':'add'})
-            }else{    
-                props.handleSubscribe({"item_code":name,'process':'add'})
+            if (name == "all-select") {
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+                props.handleSubscribe({ "item_code": name, 'process': 'add' })
             }
+            else {
+                props.handleSubscribe({ "item_code": name, 'process': 'add' })
             }
+        }
         else {
             console.log("unchecked");
-            props.handleSubscribe({"item_code":name,'process':'remove'})
+            props.handleSubscribe({ "item_code": name, 'process': 'remove' })
+            $(':checkbox').each(function () {
+                this.checked = false;
+            });
         }
+
     }
 
-    function changeQty ( value, index ) {
+    function changeQty(value, index) {
         setCartList(
-            cartList.map( ( item, ind ) => {
-
-                if ( ind == index )
+            cartList.map((item, ind) => {
+                if (ind == index)
                     return {
                         ...item,
                         qty: value,
                     };
 
                 return item;
-            } )
+            })
         )
     }
 
@@ -58,7 +66,6 @@ function Cart ( props ) {
                     </ol>
                 </div>
             </nav>
-
             <div className="page-content pb-5">
                 <div className="cart">
                     <div className="container">
@@ -70,7 +77,7 @@ function Cart ( props ) {
                                             <table className="table table-cart table-mobile">
                                                 <thead>
                                                     <tr>
-                                                        <input className='rahi-checkbox' type="checkbox"  id="all-select"  name="all-select"  onChange={handleChange}  />
+                                                        <input className='rahi-checkbox' type="checkbox" id="all-select" name="all-select" onChange={handleChange} />
                                                         <label className='rahi-checkboxlabel'  >Subscribe all</label>
                                                     </tr>
                                                     <tr>
@@ -82,34 +89,34 @@ function Cart ( props ) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { cartList.length > 0 ?
-                                                        cartList.map( ( item, index ) =>
-                                                            <tr key={ index }>
+                                                    {cartList.length > 0 ?
+                                                        cartList.map((item, index) =>
+                                                            <tr key={index}>
                                                                 <td className="product-col">
-                                                                    <input className='rahi-checkbox' type="checkbox" id="check2" value="1" name={item.item_code}  onChange={handleChange} ></input>
+                                                                    <input className='rahi-checkbox' type="checkbox" id="check2" value="1" name={item.item_code} onChange={handleChange} ></input>
                                                                     <div className="product">
                                                                         <figure className="product-media">
-                                                                            <ALink href={ `/product/default/${item.item_code}` } className="product-image">
-                                                                                <img src={ process.env.NEXT_PUBLIC_ASSET_URI + item.image } alt="product" />
+                                                                            <ALink href={`/product/default/${item.item_code}`} className="product-image">
+                                                                                <img src={process.env.NEXT_PUBLIC_ASSET_URI + item.image} alt="product" />
                                                                             </ALink>
                                                                         </figure>
                                                                         <h4 className="product-title">
-                                                                            <ALink href={ `/product/default/${item.item_code}` }>{ item.item_code }  </ALink>
+                                                                            <ALink href={`/product/default/${item.item_code}`}>{item.item_code}  </ALink>
                                                                         </h4>
 
                                                                     </div>
                                                                 </td>
                                                                 <td className="product-col">
-                                                                    <h7> <ALink href={ `#` }>{ item.description ? (item.description).replace(/(<([^>]+)>)/ig, '') : '' }</ALink></h7>
-                                                                    <h9 className="rahi-cart-product-quantity"><br></br>In Stock ({ item.actual_qty }) </h9>
+                                                                    <h7> <ALink href={`#`}>{item.description ? (item.description).replace(/(<([^>]+)>)/ig, '') : ''}</ALink></h7>
+                                                                    <h9 className="rahi-cart-product-quantity"><br></br>In Stock ({item.actual_qty}) </h9>
                                                                 </td>
                                                                 <td className="quantity-col">
-                                                                    <Qty value={ item.qty } changeQty={ current => changeQty( current, index ) } adClass="cart-product-quantity"></Qty>
+                                                                    <Qty value={item.qty} changeQty={current => changeQty(current, index)} adClass="cart-product-quantity"></Qty>
                                                                 </td>
                                                                 <td className="total-col">
                                                                 </td>
                                                                 <td className="remove-col">
-                                                                    <button className="btn-remove" onClick={ () => props.removeFromCart( item ) }><i className="icon-close"></i></button>
+                                                                    <button className="btn-remove" onClick={() => props.removeFromCart(item)}><i className="icon-close"></i></button>
                                                                 </td>
                                                             </tr>
                                                         ) :
@@ -123,19 +130,17 @@ function Cart ( props ) {
                                             </table>
                                         </div><br></br>
                                         <div className="rahi-cart-bottom">
-                                                <button className="btn btn-outline-primary-2 btn-order btn-block" href="/customer/Subscription-form" onClick={props.handleshowSubscriptionform}><span>Proceed To Subscription</span><i className="icon-long-arrow-right"></i></button>
+                                            <button className="btn btn-outline-primary-2 btn-order btn-block" href="/customer/Subscription-form" onClick={props.handleshowSubscriptionform}><span>Proceed To Subscription</span><i className="icon-long-arrow-right"></i></button>
                                         </div>
                                     </div>
                                     <aside className="col-lg-3">
                                         <div className="summary summary-cart">
                                             <button
                                                 className="btn btn-outline-primary-2 btn-order btn-block"
-                                            //    onClick={props.handleshowSubscriptionform}
                                             >
                                                 PROCEED TO CHECKOUT
                                             </button>
                                         </div>
-
                                         <ALink href="/shop/sidebar/list" className="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i className="icon-refresh"></i></ALink>
                                     </aside>
                                 </div>
@@ -143,7 +148,7 @@ function Cart ( props ) {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="cart-empty-page text-center">
-                                            <i className="cart-empty icon-shopping-cart" style={ { lineHeight: 1, fontSize: '15rem' } }></i>
+                                            <i className="cart-empty icon-shopping-cart" style={{ lineHeight: 1, fontSize: '15rem' }}></i>
                                             <p className="px-3 py-2 cart-empty mb-3">No products added to the cart</p>
                                             <p className="return-to-shop mb-0">
                                                 <ALink
@@ -161,11 +166,10 @@ function Cart ( props ) {
         </div>
     )
 }
-const mapStateToProps = ( state ) => (
+const mapStateToProps = (state) => (
     {
 
         cartItems: state.cartlist.data
     }
 )
-
-export default connect( mapStateToProps, { ...cartAction } )( Cart );
+export default connect(mapStateToProps, { ...cartAction })(Cart);
