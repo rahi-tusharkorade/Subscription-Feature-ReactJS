@@ -71,8 +71,9 @@ function mysubscription ( props ) {
                                                                                 <Popup  trigger={  <button  onClick={(e) => {
                                                                                     }}
                                                                                     >View </button>}>
-                                                                                        <div className='popupforview'>itemcode is {d["itemcode"]} discription - {d["description"]} </div>                                                                                                                                                             
+                                                                                        <div className='popupforview'>itemcode is {d["itemcode"]} <br /> discription - {d["description"]} </div>                                                                                                                                                             
                                                                                     
+
                                                                                 </Popup>  
 
 
