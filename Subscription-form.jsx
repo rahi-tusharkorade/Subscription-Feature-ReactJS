@@ -35,19 +35,20 @@ function Subscriptionform(props) {
             })
     // }, [])
     // useEffect(() => {
+
         let sublist = localStorage.getItem('subList')                                                                    //store only item code - data
         let list_alldata = []                                                                                           //used for store all data
         let sublst = []                                                                                                 //used for only itemcode based on select 
         for (let temp in props.cartItems) {
             if (sublist.includes("all-select")) {
                 list_alldata.push(props.cartItems[temp])
-                let dict = { 'itemcode': props.cartItems[temp]['item_code'] }
+                let dict = { 'itemcode': props.cartItems[temp]['item_code'] ,'description':props.cartItems[temp]['description'] }
                 sublst.push(dict)
                 
             }
             if (sublist.includes(props.cartItems[temp]['item_code'])) {
                 list_alldata.push(props.cartItems[temp])
-                let dict = { 'itemcode': props.cartItems[temp]['item_code'] }
+                let dict = { 'itemcode': props.cartItems[temp]['item_code'],'description':props.cartItems[temp]['description'] }
                 sublst.push(dict)
             }
 

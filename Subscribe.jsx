@@ -3,6 +3,8 @@ import ALink from '~/components/features/alink';
 import PageHeader from '~/components/features/page-header';
 import Moment from 'moment';
 import Popup from 'reactjs-popup';
+import ReactDOM from "react-dom";
+
 
 function mysubscription ( props ) {
     const[data,setdata]= useState([]);
@@ -68,10 +70,15 @@ function mysubscription ( props ) {
                                                                         <td data-th="Actions" className="rahi-col actions rahi-down-table">
                                                                             {/* <button className="action view" onClick={props.subformshow}><span>View </span>  |</button>  */}
                                                                            
-                                                                                <Popup  trigger={  <button  onClick={(e) => {
-                                                                                    }}
+                                                                                <Popup trigger={  <button  onClick={(e) => {
+                                                                                    }} 
+                                                                                    
                                                                                     >View </button>}>
-                                                                                        <div className='popupforview'>itemcode is {d["itemcode"]} <br /> discription - {d["description"]} </div>                                                                                                                                                             
+                                                                                        <div 
+                                                                                            className='popupforview'><span><b>Product Details : </b><br/></span><b>Itemcode - </b>{d["itemcode"]} <br /> <b>Discription - </b>{d["description"].replace(/(<([^>]+)>)/ig, '')}
+                                                                                                                                                                                    
+                                                                                        </div>  
+                                                                                                                                                                                                                                   
                                                                                     
 
                                                                                 </Popup>  
