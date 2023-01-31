@@ -68,19 +68,14 @@ function mysubscription ( props ) {
                                                                         <td data-th="Actions" className="rahi-col actions rahi-down-table">
                                                                             {/* <button className="action view" onClick={props.subformshow}><span>View </span>  |</button>  */}
                                                                            
-                                                                                <Popup  trigger={  <button  onChange={(e) => {
-                                                                                    var newdata = data[index];
-                                                                                    console.log("newdata",newdata.itemcode)
-                                                                                    setitemcode(newdata.itemcode)
-                                                                                    
+                                                                                <Popup  trigger={  <button  onClick={(e) => {
                                                                                     }}
-                                                                                                                                                                    
-                                                                                    >View</button>}>
-                                                                                        <div>itemcode is {itemcode} </div>                                                                                                                                                             
+                                                                                    >View </button>}>
+                                                                                        <div className='popupforview'>itemcode is {d["itemcode"]} discription - {d["description"]} </div>                                                                                                                                                             
                                                                                     
                                                                                 </Popup>  
 
-                                                                            
+
                                                                             <button className="action view"  onClick={(e) => {
                                                                                 var temp = data[index];
                                                                                 var newArray = data.map(dt => {
