@@ -3,22 +3,18 @@ import ALink from '~/components/features/alink';
 import PageHeader from '~/components/features/page-header';
 import Moment from 'moment';
 import Popup from 'reactjs-popup';
-import ReactDOM from "react-dom";
-
+import React from 'react';
+import 'reactjs-popup/dist/index.css';
 
 function mysubscription ( props ) {
     const[data,setdata]= useState([]);
-    const[itemcode,setitemcode]= useState([]);
+    const [isShow, setIsShow] = useState(false)
 
-    
     useEffect( () => {
         setdata(props.sublst.map(d => ({...d, status: "Subscribe"})));
-        // console.log("item codeeeeeeeeeeeeeee",props.sublst)
-        
-        
+        // console.log("item codeeeeeeeeeeeeeee",props.sublst
        }, [ ] )
-
-    
+       
     return (
         <div className="main">
             <PageHeader title="My Subscriptions" subTitle="Account Information" />
@@ -69,21 +65,22 @@ function mysubscription ( props ) {
                                                                         <td className='rahi-down-table' >{d.status}</td>
                                                                         <td data-th="Actions" className="rahi-col actions rahi-down-table">
                                                                             {/* <button className="action view" onClick={props.subformshow}><span>View </span>  |</button>  */}
-                                                                           
-                                                                                <Popup trigger={  <button  onClick={(e) => {
-                                                                                    }} 
-                                                                                    
-                                                                                    >View </button>}>
-                                                                                        <div 
-                                                                                            className='popupforview'><span><b>Product Details : </b><br/></span><b>Itemcode - </b>{d["itemcode"]} <br /> <b>Discription - </b>{d["description"].replace(/(<([^>]+)>)/ig, '')}
-                                                                                                                                                                                    
-                                                                                        </div>  
-                                                                                                                                                                                                                                   
-                                                                                    
 
-                                                                                </Popup>  
-
-
+                                                                                <div>  
+                                                                                    {/* <button onClick={(e) =>{  setIsShow(true)}} > View </button> */}
+                                                                                    <Popup trigger={<button onClick={(e) =>{  setIsShow(true)}} > View </button>}
+                                                                                        open={isShow} 
+                                                                                        modal nested>
+                                                                                        <div  className='newpopup'>
+                                                                                            <span ><b>Product Details</b>
+                                                                                            <br/><br/>
+                                                                                            </span><b>Itemcode - </b>{d["itemcode"]} <br /> <br/>
+                                                                                            <b>Description - </b>{d["description"].replace(/(<([^>]+)>)/ig, '')}
+                                                                                        </div>
+                                                                                    </Popup>
+                                                                                </div> 
+                                                                                
+                                                                            <span>|</span>
                                                                             <button className="action view"  onClick={(e) => {
                                                                                 var temp = data[index];
                                                                                 var newArray = data.map(dt => {
@@ -98,7 +95,7 @@ function mysubscription ( props ) {
                                                                                 })
                                                                                 setdata(newArray)
                                                                                 
-                                                                            }}><span>Cancel Subscription</span></button>
+                                                                            }}><span> Cancel Subscription</span></button>
                                                                         </td>
                                                                     </tr>
                                                                     
