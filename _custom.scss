@@ -2291,18 +2291,22 @@ custom_info_transit tbody>tr>th,
 .popupforview{
     font-weight: normal;
     background-color: #d7d7d7;
-    color: #162e55;
+    color: #000000;
     width: 103%;
-    height: 27vh;
+    height:auto;
     margin-left: auto;
     font-family: cursive;
-
+    border: 1px solid #888;
+    padding: 5px 5px 5px 10px;
     
 }
+.newpopup{
+    height:200px;
+    border: 2px solid #888;
+    padding: 20px 20px 20px 20px;
+    color: #000000;
+}
 
-
-
-// new modified
 
 
 
